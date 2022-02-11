@@ -1,0 +1,16 @@
+Framework Symfony :
+(Framework: cadre de travail, avec une architecture prédéfinie et un ensemble de bibliothèques de fonctionnalités mises à notre disposition)
+
+Code open-source, structure et squelette de site à disposition.
+- Un des framework (français) les plus utilisés notamment en Europe.
+- Grosse communauté qui participe à son développement et son débugage.
+- Documentations très fournies.
+
+
+Gestionnaire de dépendances qui est "Composer". Il nous permet d'installer les bibliothèques dont on aura besoin dans notre projet. Il va également gérer les conflits entre certains composants (versions, fonctionnalités etc).
+
+ORM (Object Relational Mapper) de Doctrine
+
+- C'est un programme qui va nous permettre de gérer toute la partie de gestion de bases de données
+
+Doctrine  est un mappeur relationnel objet (ORM) pour PHP 7.1+ qui fournit une persistance transparente pour les objets PHP. Il repose sur une puissante couche d'abstraction de base de données (DBAL). L'une de ses fonctionnalités clés est la possibilité d'écrire des requêtes de base de données dans un dialecte SQL orienté objet propriétaire appelé Doctrine Query Language (DQL), inspiré du HQL d'Hibernate. Cela offre aux développeurs une alternative puissante à SQL qui maintient la flexibilité sans nécessiter de duplication de code inutile.

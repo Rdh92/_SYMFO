@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %} {#Ici nous indiquons que l'on veut étendre de notre gabarit principal: base.html.twig #}
+
+{% block body %}
+{# Syntaxe du moteur Twig #}
+
+{# Commentaires Twig #}
+
+<h1> {{title }} </h1> {# Ici nous interpolons la variable 'titre1' que nous a envoyé la fonction rende() de 'home', depuis notre BlogController #}
+
+{% if age < 18 %}
+<div class="alert alert-danger text-center rounded">
+    <p>Vous êtes mineur age {{ age }} , accès interdit </p>
+</div>
+{% else %}
+<div class="alert alert-success text-center rounded">
+    <p> Vous avez l'âge requis, bienvenue</p>
+</div>
+
+
+<div class="p-5 bg-light mt-5 mx-auto mt-5 rounded shadow">
+</div>
+
+{% endif %}
+
+{% endblock %}
