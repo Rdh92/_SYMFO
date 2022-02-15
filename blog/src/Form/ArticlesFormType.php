@@ -16,7 +16,7 @@ class ArticlesFormType extends AbstractType
             ->add('content')
             ->add('image')
             ->add('author')
-            ->add('createdAt')
+            // ->add('createdAt')
         ;
     }
 

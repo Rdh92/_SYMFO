@@ -1,5 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% blockbody %}
+{% block body %}
+    <h1 class="display-4 text-center mx-auto my-3"> AJOUTER UN ARTICLE</h1>
+
+    {# form() : est une fonction Twig qui permet d'afficher un formulaire tel que défini dans notre class 'ArticlesFormType'#}
+
+    {#form_start(): est la balise d'ouverture du formulaire #}
+
+    {{ form_start(formulaire) }} {# Ici 'formulaire' représente le $form que l'on a créé dans notre controller ('formulaire' => $form) #}
+
+    {{ form_row(formulaire.title) }}
+
+    {{ form_row(formulaire.content) }}
+
+    {{ form_row(formulaire.image) }}
+
+    {{ form_row(formulaire.author) }}
+
+    <button type="submit" class="btn btn-primary">AJOUTER</button>
+
+    {{ form_end(formulaire)}} {#form_end() : Balise de fermeture du formulaire#}
+
 
 {% endblock %}

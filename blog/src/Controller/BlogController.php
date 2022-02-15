@@ -7,6 +7,8 @@ use App\Entity\Articles;
 use App\Form\ArticlesFormType;
 use App\Repository\ArticleRepository;
 use App\Repository\ArticlesRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -70,17 +72,45 @@ class BlogController extends AbstractController
         /**
          *  @Route("/new", name="new")
          */
-        public function create(Article $articleNew = null): Response
+        public function create(Article $articleNew = null, Request $request, EntityManagerInterface $manager): Response
         {
-            dd($articleNew);
+            // dd($articleNew);
 
             // Nous avons créer une classe 'ArticlesFormType' qui permet de générer un formulaire d'ajout d'article.
             $form = $this->createForm(ArticlesFormType::class, $articleNew); //createForm() prend en paramètre le type de formulaire et la classe sur laquelle on injectera les valeurs entrées dans les inputs (name="title", name="content", etc)
 
-            dd($form);
+            // dd($form);
+
+            // dd(get_class_methods($form));
+
+            if(!$articleNew)
+            {
+                $articleNew = new Article();
+            }
+
+                $form->handleRequest($request); // On pioche la méthode handleRequest() de la class Request(composant)
+
+                //dd($request);
+
+                if($form->isSubmitted() && $form->isValid())
+                {
+                    $articleNew->setCreatedAt(new \Datetime); // On doit instancier Datetime(), car le champs est non null en bdd
+
+                    $manager->persist($articleNew); // On met les données récupérées dans $articleNew en mémoire avant envoi en BDD
+
+                    $manager->flush();// On insère tout dans notre table article en BDD
+
+                    // redirectToRoute() est une fonction de redirection (ex: header)
+                    //Location: blog?id=15.php
+                    return $this->redirectToRoute('show', [
+                    'id' => $articleNew->getId() // On récupère le dernier id de l'article que l'on vient d'insérer en base de données
+                    ]);
+                }
 
             return $this->render('blog/new.html.twig', [
+                //A TRADUIRE PAR RENDU, RENDU VISUEL
                 // 'articleNew' => $articleNew
-            ]);
+                'formulaire' => $form->createView() // Ici on renvoi le formulaire $form avec tous les champs requis pour une insertion en BDD et on envoie le tout vers la vue, grâce à la méthode createView()
+                ]);
         }
 }
